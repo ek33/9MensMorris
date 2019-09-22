@@ -2,8 +2,6 @@
 
 <br>
 
-## Start Guide
-
 ```
 pip3 install -r requirements.txt
 python3 main.py
@@ -27,7 +25,31 @@ python3 main.py
 7. As a player, with only 3 pieces, I can move to any empty cell.
 8. As players, we know the game is over when a player only has 2 pieces.
 
-# Customization
+# Dev Info
 
 **Adding new packages**
-In requirements.txt add a new line for the package `{yourpackage}=={version}`
+
+In requirements.txt add `{yourpackage}=={version}`
+Install the package with `pip3 install -r requirements.txt`
+
+**Using Git**
+
+Change branch `git checkout {branch-name}`
+Add changes `git add .`
+Declare commit `git commit -m "{Your description}"`
+Push to github `git push`
+
+# Noteworthy Links
+
+**Python Tutorials**
+
+[syntax](https://google.com)
+[functions](https://google.com)
+[classes](https://google.com)
+[imports](https://google.com)
+
+**Important Packages**
+
+[pytest](https://google.com)
+[kivy](https://google.com)
+[pygame](https://google.com)
