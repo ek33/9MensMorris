@@ -2,6 +2,13 @@
 
 <br>
 
+## Start Guide
+
+```
+pip3 install -r requirements.txt
+python3 main.py
+```
+
 # User Story
 ###### Version 1
 
