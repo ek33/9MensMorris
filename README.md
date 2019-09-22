@@ -26,3 +26,8 @@ python3 main.py
 6. As a player, when all pieces have been placed, I can start moving them to adjacent empty cells.
 7. As a player, with only 3 pieces, I can move to any empty cell.
 8. As players, we know the game is over when a player only has 2 pieces.
+
+# Customization
+
+**Adding new packages**
+In requirements.txt add a new line for the package `{yourpackage}=={version}`
