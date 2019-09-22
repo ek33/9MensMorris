@@ -29,27 +29,27 @@ python3 main.py
 
 **Adding new packages**
 
-In requirements.txt add `{yourpackage}=={version}`
-Install the package with `pip3 install -r requirements.txt`
+- In requirements.txt add `{yourpackage}=={version}`
+- Install the package with `pip3 install -r requirements.txt`
 
 **Using Git**
 
-Change branch `git checkout {branch-name}`
-Add changes `git add .`
-Declare commit `git commit -m "{Your description}"`
-Push to github `git push`
+- Change branch `git checkout {branch-name}`
+- Add changes `git add .`
+- Declare commit `git commit -m "{Your description}"`
+- Push to github `git push`
 
-# Noteworthy Links
+# Helpfull Links
 
 **Python Tutorials**
 
-[syntax](https://google.com)
-[functions](https://google.com)
-[classes](https://google.com)
-[imports](https://google.com)
+- [syntax](https://google.com)
+- [functions](https://google.com)
+- [classes](https://google.com)
+- [imports](https://google.com)
 
 **Important Packages**
 
-[pytest](https://google.com)
-[kivy](https://google.com)
-[pygame](https://google.com)
+- [pytest](https://google.com)
+- [kivy](https://google.com)
+- [pygame](https://google.com)
