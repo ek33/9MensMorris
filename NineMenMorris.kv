@@ -1,0 +1,69 @@
+#:kivy 1.11.1
+
+<NineMenMorrisGame>:
+    canvas:
+        #Outermost Square's Lines
+        Rectangle:
+            pos: self.center_x - 304, self.center_y - 300
+            size: 8, 600
+        Rectangle:
+            pos: self.center_x + 296, self.center_y - 300
+            size: 8, 600
+        Rectangle:
+            pos: self.center_x - 300, self.center_y - 304
+            size: 600, 8
+        Rectangle:
+            pos: self.center_x - 300, self.center_y + 296
+            size: 600, 8
+        #Middle Square's Lines
+        Rectangle:
+            pos: self.center_x - 204, self.center_y - 200
+            size: 8, 400
+        Rectangle:
+            pos: self.center_x + 196, self.center_y - 200
+            size: 8, 400
+        Rectangle:
+            pos: self.center_x - 200, self.center_y - 204
+            size: 400, 8
+        Rectangle:
+            pos: self.center_x - 200, self.center_y + 196
+            size: 400, 8
+        #Innermost Square's Lines
+        Rectangle:
+            pos: self.center_x - 104, self.center_y - 100
+            size: 8, 200
+        Rectangle:
+            pos: self.center_x + 96, self.center_y - 100
+            size: 8, 200
+        Rectangle:
+            pos: self.center_x - 100, self.center_y - 104
+            size: 200, 8
+        Rectangle:
+            pos: self.center_x - 100, self.center_y + 96
+            size: 200, 8
+        #Lines between Squares
+        Rectangle:
+            pos: self.center_x - 296, self.center_y
+            size: 192, 8
+        Rectangle:
+            pos: self.center_x + 104, self.center_y
+            size: 192, 8
+        Rectangle:
+            pos: self.center_x, self.center_y +104
+            size: 8, 192
+        Rectangle:
+            pos: self.center_x, self.center_y -296
+            size: 8, 192
+
+
+    Label:
+        font_size: 15
+        center_x: root.center_x - 400
+        center_y: root.center_y + 200
+        text: "Black"
+
+    Label:
+        font_size: 15
+        center_x: root.center_x + 400
+        center_y: root.center_y + 200
+        text: "White"
