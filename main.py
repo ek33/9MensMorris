@@ -1,24 +1,24 @@
 from src.game import Game
-
-# Kivy Pong example
 from kivy.app import App
 from kivy.uix.widget import Widget
 
-class PongGame(Widget):
+from kivy.core.window import Window
+Window.size = (950, 650)
+
+class NineMenMorrisGame(Widget):
     pass
 
-
-class PongApp(App):
+class NineMenMorrisApp(App):
     def build(self):
-        return PongGame()
+        self.title = "9 Men's Morris"
+        return NineMenMorrisGame()
 
 if __name__ == '__main__':
+    NineMenMorrisApp().run()
 
-    PongApp().run()
-    
     game = Game()
 
     while game.ongoing:
-       game.nextTurn()
+        game.nextTurn()
 
     print('Game Over')
