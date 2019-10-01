@@ -4,6 +4,7 @@ from kivy.uix.widget import Widget
 
 from kivy.core.window import Window
 Window.size = (950, 650)
+Window.clearcolor = (94/256, 107/256, 98/256, 1)
 
 class NineMenMorrisGame(Widget):
     pass
