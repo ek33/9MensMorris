@@ -1,15 +1,22 @@
 #:kivy 1.11.1
 
 <NineMenMorrisGame>:
+    white1: w1
+    white2: w2
+    black1: b1
+    black2: b2
     canvas:
 #Outermost Square's Lines
         Rectangle:
+            #source: 'src/rectangle_regular.png'
             pos: self.center_x - 304, self.center_y - 300
             size: 8, 600
         Rectangle:
+            #source: 'src/rectangle_regular.png'
             pos: self.center_x + 296, self.center_y - 300
             size: 8, 600
         Rectangle:
+            #source: 'src/rectangle_horizontal_highlighted.png'
             pos: self.center_x - 300, self.center_y - 304
             size: 600, 8
         Rectangle:
@@ -70,21 +77,21 @@
 # Positions of pieces
 #First Row
     Image: #a1
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 325, root.center_y -323
 
     Image: #a4
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 21, root.center_y -323
 
     Image: #a7
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -92,21 +99,21 @@
 
 #Second Row
     Image: #b2
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 225, root.center_y -223
 
     Image: #b4
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 21, root.center_y -223
 
     Image: #b6
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -114,21 +121,21 @@
 
 #Third Row
     Image: #c3
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 125, root.center_y -123
 
     Image: #c4
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 21, root.center_y -123
 
     Image: #c5
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -136,42 +143,42 @@
 
 #Fourth Row
     Image: #d1
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 325, root.center_y - 20
 
     Image: #d2
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 225, root.center_y - 20
 
     Image: #d3
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 125, root.center_y - 20
 
     Image: #d5
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 75, root.center_y - 20
 
     Image: #d6
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 175, root.center_y - 20
 
     Image: #d7
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -179,21 +186,21 @@
 
 #Fifth row
     Image: #e3
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 125, root.center_y + 75
 
     Image: #e4
-        source: 'piece_black.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 21, root.center_y + 75
 
     Image: #e5
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -201,21 +208,21 @@
 
 #Sixth row
     Image: #f2
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 225, root.center_y + 175
 
     Image: #f4
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 21, root.center_y + 175
 
     Image: #f6
-        source: 'piece_black.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -223,21 +230,21 @@
 
 #Seventh row
     Image: #g7
-        source: 'piece_black.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 275, root.center_y + 275
 
     Image: #g4
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + -21, root.center_y + 275
 
     Image: #g1
-        source: 'piece_white.png'
+        source: 'src/empty_position.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -247,64 +254,67 @@
 
 #White Side
 
+
     Image: #W1
-        source: 'piece_white.png'
+        id: w1
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 350, root.center_y + 100
 
     Image: #W2
-        source: 'piece_white.png'
+        id: w2
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 425, root.center_y + 100
 
     Image: #W3
-        source: 'piece_white.png'
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 350, root.center_y + 25
 
     Image: #W4
-        source: 'piece_white.png'
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 425, root.center_y + 25
 
     Image: #W5
-        source: 'piece_white.png'
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 350, root.center_y - 50
 
     Image: #W6
-        source: 'piece_white.png'
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 425, root.center_y - 50
 
     Image: #W7
-        source: 'piece_white.png'
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 350, root.center_y  - 125
 
     Image: #W8
-        source: 'piece_white.png'
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x + 425, root.center_y - 125
 
     Image: #W9
-        source: 'piece_white.png'
+        source: 'src/piece_white.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
@@ -312,64 +322,67 @@
 
 #Black Side
 
+
     Image: #B1
-        source: 'piece_black.png'
+        id: b1
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 475, root.center_y + 100
 
     Image: #B2
-        source: 'piece_black.png'
+        id: b2
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 400, root.center_y + 100
 
     Image: #B3
-        source: 'piece_black.png'
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 475, root.center_y + 25
 
     Image: #B4
-        source: 'piece_black.png'
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 400, root.center_y + 25
 
     Image: #B5
-        source: 'piece_black.png'
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 475, root.center_y - 50
 
     Image: #B6
-        source: 'piece_black.png'
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 400, root.center_y - 50
 
     Image: #B7
-        source: 'piece_black.png'
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 475, root.center_y  - 125
 
     Image: #B8
-        source: 'piece_black.png'
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
         pos:  root.center_x - 400, root.center_y - 125
 
     Image: #B9
-        source: 'piece_black.png'
+        source: 'src/piece_black.png'
         allow_stretch: True
         keep_ratio: False
         size: 50, 50
