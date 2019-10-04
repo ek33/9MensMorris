@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+src/empty_position2.png
+*.iml
+*.xml
+rectangle_horizontal_highlighted.psd
+src/empty_place(editable).psd
