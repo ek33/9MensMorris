@@ -15,6 +15,36 @@ class NineMenMorrisGame(Widget):
     black1 = ObjectProperty(None)
     white2 = ObjectProperty(None)
     black2 = ObjectProperty(None)
+    #HereStarts
+    app = App.get_running_app()
+
+    CellList=[Cell.Cells(app.root.center_x - 325, app.root.center_y + 275, 'a1', True),
+              Cell.Cells(app.root.center_x - 21, app.root.center_y + 275, 'a4', True),
+              Cell.Cells(app.root.center_x + 275, app.root.center_y + 275, 'a7', True),
+              Cell.Cells(app.root.center_x - 225, app.root.center_y + 175, 'b2', True),
+              Cell.Cells(app.root.center_x - 21, app.root.center_y + 175, 'b4', True),
+              Cell.Cells(app.root.center_x + 175, app.root.center_y + 175, 'b6', True),
+              Cell.Cells(app.root.center_x - 125, app.root.center_y + 75, 'c3', True),
+              Cell.Cells(app.root.center_x - 21, app.root.center_y + 75, 'c4', True),
+              Cell.Cells(app.root.center_x + 75, app.root.center_y + 75, 'c5', True),
+              Cell.Cells(app.root.center_x - 325, app.root.center_y - 20, 'd1', True),
+              Cell.Cells(app.root.center_x - 225, app.root.center_y - 20, 'd2', True),
+              Cell.Cells(app.root.center_x - 125, app.root.center_y - 20, 'd3', True),
+              Cell.Cells(app.root.center_x + 75, app.root.center_y - 20, 'd5', True),
+              Cell.Cells(app.root.center_x + 175, app.root.center_y - 20, 'd6', True),
+              Cell.Cells(app.root.center_x + 275, app.root.center_y - 20, 'd7', True),
+              Cell.Cells(app.root.center_x - 325, app.root.center_y - 323, 'g1', True),
+              Cell.Cells(app.root.center_x - 21, app.root.center_y - 323, 'g4', True),
+              Cell.Cells(app.root.center_x + 275, app.root.center_y - 323, 'g7', True),
+              Cell.Cells(app.root.center_x - 225, app.root.center_y - 223, 'f2', True),
+              Cell.Cells(app.root.center_x - 21, app.root.center_y - 223, 'f4', True),
+              Cell.Cells(app.root.center_x + 175, app.root.center_y - 223, 'f6', True),
+              Cell.Cells(app.root.center_x - 125, app.root.center_y - 123, 'e3', True),
+              Cell.Cells(app.root.center_x - 21, app.root.center_y - 123, 'e4', True),
+              Cell.Cells(app.root.center_x + 75, app.root.center_y - 123, 'e5', True)
+              ]
+    #HereEnds
+    
     def on_touch_down(self, touch):
         if self.i == 0:
             self.white1.pos = touch.x - 25, touch.y - 25
