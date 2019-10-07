@@ -14,7 +14,9 @@ class NineMenMorrisGame(Widget):
     turn = 1
     validTurn = False
 
-    #board = Board(Widget.get_root_window())
+    #app = App.get_running_app()
+
+
 
     white1 = ObjectProperty(None)
     white2 = ObjectProperty(None)
@@ -37,7 +39,10 @@ class NineMenMorrisGame(Widget):
     black9 = ObjectProperty(None)
 
     def on_touch_down(self, touch):
-        board = Board(Widget.get_root_window())
+        #self.app = App.get_running_app()
+        #self.board=Board(self.app.root)
+        self.board = Board(App.get_running_app().root)
+
         if (self.turn % 2):
             # black
             print('black')
