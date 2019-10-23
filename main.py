@@ -36,11 +36,9 @@ class NineMenMorrisGame(Widget):
     black6 = ObjectProperty(None)
     black7 = ObjectProperty(None)
     black8 = ObjectProperty(None)
-    black9 = ObjectProperty(None)
+    black9 = ObjectProperty(None)    	
 
     def on_touch_down(self, touch):
-        #self.app = App.get_running_app()
-        #self.board=Board(self.app.root)
         self.board = Board(App.get_running_app().root)
 
         if (self.turn % 2):
@@ -70,23 +68,29 @@ class NineMenMorrisApp(App):
         return NineMenMorrisGame()
 
 if __name__ == '__main__':
-    # Open game window
+    # Run App
     NineMenMorrisApp().run()
-	
+    
     # Create players
     black = new Player('white')
     white = new Player('black')
-    
+
+    # Give players peices
+
     # Choose who goes first
     if choice == 'white':
-    	white.turn = True
+    white.turn = True
     if choice == 'black':
-    	black.turn = True
- 	
+    black.turn = True
+
+    # Create board
+    self.board = Board(App.get_running_app().root)
+
+    # Create game
+    game = Game(board, white, black)
+
     # Start game
-    game = Game(white, black)
-    
     while game.ongoing:
-        game.nextTurn()
+    game.nextTurn()
 
     print('Game Over')
