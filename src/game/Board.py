@@ -3,6 +3,7 @@ from kivy.app import App
 
 class Board:
     cells = []
+    selected = False
 
     def __init__(self, root):
 
@@ -41,10 +42,24 @@ class Board:
         placed = False
 
         for cell in self.cells:
-            if cell.close(point):
+            if cell.close(point.get('x'), point.get('y')):
                 piece.pos = point.get('x'), point.get('y')
                 placed = True
 
-
-
         return placed
+     
+     def select(self, touch):
+    	for cell in self.cells:
+            if cell.close(point.get('x'), point.get('y')):
+                self.selected = piece
+                return True
+        
+        return False
+     	
+     def move(self, touch):
+     	if self.selected:
+       		placed = self.place(self.selected, touch)
+        	self.selected = False
+            return placed
+        else:
+        	return False
