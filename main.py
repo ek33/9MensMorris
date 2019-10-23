@@ -70,10 +70,22 @@ class NineMenMorrisApp(App):
         return NineMenMorrisGame()
 
 if __name__ == '__main__':
+    # Open game window
     NineMenMorrisApp().run()
-
-    game = Game()
-
+	
+    # Create players
+    black = new Player('white')
+    white = new Player('black')
+    
+    # Choose who goes first
+    if choice == 'white':
+    	white.turn = True
+    if choice == 'black':
+    	black.turn = True
+ 	
+    # Start game
+    game = Game(white, black)
+    
     while game.ongoing:
         game.nextTurn()
 
