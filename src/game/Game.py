@@ -9,9 +9,14 @@ class Game:
         print('Starting Game')
         self.players.append(player1)
         self.players.append(player2)
-
+	
     def nextTurn(self):
         print('turn {}'.format(self.turn))
         self.turn += 1
         if self.turn > 2:
             self.ongoing = False
+            
+    def activePlayer(self):
+    	for player in self.players:
+        	if(player.turn)
+            	return player
