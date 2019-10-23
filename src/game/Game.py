@@ -1,10 +1,14 @@
+from src.game import Player
+
 class Game:
     ongoing = True
     players = []
     turn = 0
 
-    def __init__(self):
+    def __init__(self, player1, player2):
         print('Starting Game')
+        self.players.append(player1)
+        self.players.append(player2)
 
     def nextTurn(self):
         print('turn {}'.format(self.turn))
