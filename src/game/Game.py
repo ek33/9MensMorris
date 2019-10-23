@@ -2,12 +2,13 @@ from src.game import Player
 from src.board import Board
 
 class Game:
-    ongoing = True
+    board
     players = []
-    turn = 0
+	ongoing = True
 
-    def __init__(self, player1, player2):
+    def __init__(self, board, player1, player2):
         print('Starting Game')
+        self.board = board
         self.players.append(player1)
         self.players.append(player2)
 	
