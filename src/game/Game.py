@@ -10,14 +10,8 @@ class Game:
         print('Starting Game')
         self.board = board
         self.players.append(player1)
-        self.players.append(player2)
-	
-    def nextTurn(self):
-        print('turn {}'.format(self.turn))
-        self.turn += 1
-        if self.turn > 2:
-            self.ongoing = False
-  
+        self.players.append(player2) 		 
+   
     def transferTurn(self, name):
         for player in self.players:
         	player.turn = False
@@ -25,3 +19,12 @@ class Game:
 				player.turn = True
                 return True
         # Needs to return false if name is wrong
+        
+	def gameOver(self):
+    	# if any player has < 3 peices
+        # if no more moves
+        # ect...
+        
+    def winner(self):
+    	# return winner
+        return self.players[0]
