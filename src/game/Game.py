@@ -1,4 +1,5 @@
 from src.game import Player
+from src.board import Board
 
 class Game:
     ongoing = True
@@ -15,8 +16,11 @@ class Game:
         self.turn += 1
         if self.turn > 2:
             self.ongoing = False
-            
-    def activePlayer(self):
-    	for player in self.players:
-        	if(player.turn)
-            	return player
+  
+    def transferTurn(self, name):
+        for player in self.players:
+        	player.turn = False
+        	if player.name == name:
+				player.turn = True
+                return True
+        # Needs to return false if name is wrong
