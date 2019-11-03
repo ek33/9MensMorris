@@ -4,9 +4,13 @@ from kivy.app import App
 class Board:
     cells = []
     selected = False
+    prevWhiteMills = 0
+    prevBlackMills = 0
+    currentWhiteMills = 0
+    currentBlackMills = 0
 
     def __init__(self, root):
-
+        self.mills = []
         self.cells = [
             Cell(root.center_x - 325, root.center_y + 275, 'a1', True),
             Cell(root.center_x - 21, root.center_y + 275, 'a4', True),
@@ -34,6 +38,45 @@ class Board:
             Cell(root.center_x + 75, root.center_y - 123, 'e5', True)
         ]
 
+    def getCellsFromMill(self, mill):
+        cells = []
+
+        for cell in self.cells:
+            if mill.check(cell.id):
+                cells.append(cell)
+
+        return cells
+
+    def whiteMills(self):
+        count = 0
+
+        for mill in self.mills:
+            cells = self.getCellsFromMill(mill)
+            whiteCells = 0
+            for cell in cells:
+                if cell.pieceColor() == 'white':
+                    whiteCells = whiteCells + 1
+
+            if whiteCells == 3:
+                count = count + 1
+
+        return count
+
+    def blackMills(self):
+        count = 0
+
+        for mill in self.mills:
+            cells = self.getCellsFromMill(mill)
+            blackCells = 0
+            for cell in cells:
+                if cell.pieceColor() == 'black':
+                    blackCells = blackCells + 1
+
+            if blackCells == 3:
+                count = count + 1
+
+        return count
+
     def place(self, piece, touch):
         point = {
             'x': touch.x - 25,
@@ -48,6 +91,20 @@ class Board:
                 placed = True
 
         return placed
+
+    def remove(self, touch):
+        point = {
+            'x': touch.x - 25,
+            'y': touch.y - 25
+        }
+        removed = False
+
+        for cell in self.cells:
+            if cell.close(point.get('x'), point.get('y')):
+                cell.removePiece()
+                removed = True
+
+        return removed
      
     def select(self, touch):
         point = {

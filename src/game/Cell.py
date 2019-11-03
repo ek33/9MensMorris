@@ -19,6 +19,7 @@ class Cell:
         return math.sqrt(h_dist + v_dist) < self.margin
 
     def removePiece(self):
+        self.piece.pos = 0, 0
         self.piece = ObjectProperty(None)
         self.empty = True
 
@@ -26,3 +27,12 @@ class Cell:
         piece.pos = self.x, self.y
         self.piece = piece
         self.empty = False
+
+    def pieceColor(self):
+        if not self.empty:
+            if 'black' in self.piece.source:
+                return 'black'
+            if 'white' in self.piece.source:
+                return 'white'
+
+        return False
