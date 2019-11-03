@@ -56,7 +56,8 @@ class Board:
         }
 
         for cell in self.cells:
-            if cell.close(point.get('x'), point.get('y')) and not cell.empty:
+            if cell.close(point.get('x'), point.get('y')):
+                print('{} : {}'.format(cell.id, cell.empty))
                 self.selected = cell
                 return True
 
