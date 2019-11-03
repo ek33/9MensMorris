@@ -1,4 +1,5 @@
 from src.game import Cell
+from src.game import Mill
 from kivy.app import App
 
 class Board:
@@ -6,7 +7,24 @@ class Board:
     selected = False
 
     def __init__(self, root):
-
+        self.mills = [
+            Mill('a1', 'a4', 'a7'),
+            Mill('b2', 'b4', 'b6'),
+            Mill('c3', 'c4', 'c5'),
+            Mill('d1', 'd2', 'd3'),
+            Mill('d5', 'd6', 'd7'),
+            Mill('e3', 'e4', 'e5'),
+            Mill('f2', 'f4', 'f6'),
+            Mill('g1', 'g4', 'g7'),
+            Mill('a1', 'd1', 'g1'),
+            Mill('b2', 'd2', 'f2'),
+            Mill('c3', 'd3', 'e3'),
+            Mill('a4', 'b4', 'c4'),
+            Mill('e4', 'f4', 'g4'),
+            Mill('c5', 'd5', 'e5'),
+            Mill('b6', 'd6', 'f6'),
+            Mill('a7', 'd7', 'g7')
+        ]
         self.cells = [
             Cell(root.center_x - 325, root.center_y + 275, 'a1', True),
             Cell(root.center_x - 21, root.center_y + 275, 'a4', True),
@@ -56,7 +74,7 @@ class Board:
         }
 
         for cell in self.cells:
-            if cell.close(point.get('x'), point.get('y')):
+            if cell.close(point.get('x'), point.get('y')) and not cell.empty:
                 print('{} : {}'.format(cell.id, cell.empty))
                 self.selected = cell
                 return True

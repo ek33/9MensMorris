@@ -69,7 +69,7 @@ class NineMenMorrisGame(Widget):
             self.turn += 1
             self.validTurn = False
 
-        if self.turn > 3:
+        if self.turn > 18:
             self.phase = 1
 
 
