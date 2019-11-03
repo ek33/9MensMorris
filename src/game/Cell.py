@@ -1,7 +1,12 @@
 import math
+from kivy.properties import (ObjectProperty)
+
 class Cell:
-    margin = 10
-    def __init__(self, x, y, id, empty):
+
+    margin = 30
+    piece = None
+
+    def __init__(self, x, y, id, empty=True):
         self.x = x
         self.y = y
         self.id = id
@@ -12,3 +17,12 @@ class Cell:
         v_dist = (y - self.y) ** 2
 
         return math.sqrt(h_dist + v_dist) < self.margin
+
+    def removePiece(self):
+        self.piece = ObjectProperty(None)
+        self.empty = True
+
+    def setPiece(self, piece):
+        piece.pos = self.x, self.y
+        self.piece = piece
+        self.empty = False

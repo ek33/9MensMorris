@@ -1,30 +1,28 @@
 from src.game import Player
-from src.board import Board
 
 class Game:
-    board
     players = []
-	ongoing = True
+    ongoing = True
 
-    def __init__(self, board, player1, player2):
+    def __init__(self, player1, player2):
         print('Starting Game')
-        self.board = board
         self.players.append(player1)
         self.players.append(player2) 		 
    
-    def transferTurn(self, name):
-        for player in self.players:
-        	player.turn = False
-        	if player.name == name:
-				player.turn = True
-                return True
+    # def transferTurn(self, name):
+    #     for player in self.players:
+    #         player.turn = False
+    #         if player.name == name:
+    #             player.turn = True
+    #             return True
         # Needs to return false if name is wrong
         
-	def gameOver(self):
-    	# if any player has < 3 peices
+	# def gameOver(self):
+        # if any player has < 3 peices
         # if no more moves
         # ect...
+        # return True
         
     def winner(self):
-    	# return winner
+        # return winner
         return self.players[0]
