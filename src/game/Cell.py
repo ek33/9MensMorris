@@ -18,8 +18,11 @@ class Cell:
 
         return math.sqrt(h_dist + v_dist) < self.margin
 
-    def removePiece(self):
+    def trashPiece(self):
         self.piece.pos = 0, 0
+        self.removePiece()
+
+    def removePiece(self):
         self.piece = ObjectProperty(None)
         self.empty = True
 

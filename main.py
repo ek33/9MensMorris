@@ -12,6 +12,7 @@ class Piece(Widget):
 class NineMenMorrisGame(Widget):
     turn = 1
     validTurn = False
+    lastPhase = 0
     phase = 0
 
     white1 = ObjectProperty(None)
@@ -38,44 +39,86 @@ class NineMenMorrisGame(Widget):
         self.board = Board(app_root)
 
     def on_touch_down(self, touch):
-        if self.validTurn:
-            self.turn += 1
-            self.validTurn = False
 
-        if self.phase == 0:
-            if self.turn % 2:
-                # black
-                print('black')
+        # Black turn
+        if self.turn % 2:
+            print('black - phase {} ::: mill # = {}'.format(self.phase, self.board.blackMills()))
+
+            self.board.prevBlackMills = self.board.blackMills()
+
+            # Placement phase
+            if self.phase == 0:
                 pieceName = 'black' + str(int((self.turn + 1) / 2))
                 piece = getattr(self, pieceName)
-                print(piece.source)
                 self.validTurn = self.board.place(piece, touch)
 
-            else:
-                # white
-                print('white')
-                pieceName = 'white' + str(int(self.turn / 2))
+            # Moving phase
+            if self.phase == 1:
+                if self.board.selected:
+                    self.validTurn = self.board.move(touch, 'black')
+                else:
+                    self.board.select(touch, 'black')
+
+            # Removing phase
+            if self.phase == 2:
+                self.validTurn = self.board.remove(touch, 'white')
+                if self.validTurn:
+                    self.phase = self.lastPhase
+
+
+
+            # Check for new mills
+            if self.board.blackMills() > self.board.prevBlackMills:
+                print('black made a new mill')
+                self.validTurn = False # still your turn
+                self.lastPhase = self.phase #last phase
+                self.phase = 2 # next click will be removal
+                self.board.prevBlackMills = self.board.blackMills()
+
+
+        else:
+            print('black - phase {} ::: mill # = {}'.format(self.phase, self.board.blackMills()))
+            self.board.prevWhiteMills = self.board.whiteMills()
+
+            # Placement phase
+            if self.phase == 0:
+                pieceName = 'white' + str(int((self.turn + 1) / 2))
                 piece = getattr(self, pieceName)
                 self.validTurn = self.board.place(piece, touch)
 
-        if self.phase == 1:
-            if self.board.selected:
-                self.board.move(touch)
-            else:
-                self.board.select(touch)
-        if self.phase == 2:
-            if self.turn % 2:
-                print('black made a mill: remove a white piece now')
+            # Moving phase
+            if self.phase == 1:
+                if self.board.selected:
+                    self.validTurn = self.board.move(touch, 'white')
+                else:
+                    self.board.select(touch, 'white')
 
-            else:
-                print('white made a mill: remove a black piece now')
+            # Removing phase
+            if self.phase == 2:
+                self.validTurn = self.board.remove(touch, 'black')
+                self.phase = self.lastPhase
+
+            # Check for new mills
+            if self.board.whiteMills() > self.board.prevWhiteMills:
+                print('white made a new mill')
+                self.validTurn = False  # still your turn
+                self.lastPhase = self.phase  # last phase
+                self.phase = 2  # next click will be removal
+                self.board.prevWhiteMills = self.board.whiteMills()
+
 
         if self.validTurn:
             self.turn += 1
             self.validTurn = False
 
-        if self.turn > 18:
+        # if self.turn > 18:
+        if self.turn > 5:
             self.phase = 1
+
+        if self.board.trashedBlack >= 7 or self.board.trashedWhite >= 7:
+            print('game over')
+
+
 
 
 

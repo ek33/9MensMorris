@@ -7,8 +7,8 @@ class Board:
     selected = False
     prevWhiteMills = 0
     prevBlackMills = 0
-    currentWhiteMills = 0
-    currentBlackMills = 0
+    trashedWhite = 0
+    trashedBlack = 0
 
     def __init__(self, root):
         self.mills = [
@@ -60,7 +60,7 @@ class Board:
         cells = []
 
         for cell in self.cells:
-            if mill.check(cell.id):
+            if mill.checkCell(cell.id):
                 cells.append(cell)
 
         return cells
@@ -104,13 +104,12 @@ class Board:
 
         for cell in self.cells:
             if cell.close(point.get('x'), point.get('y')) and cell.empty:
-                print('{} : {}'.format(cell.id, cell.empty))
                 cell.setPiece(piece)
                 placed = True
 
         return placed
 
-    def remove(self, touch):
+    def remove(self, touch, color):
         point = {
             'x': touch.x - 25,
             'y': touch.y - 25
@@ -118,32 +117,87 @@ class Board:
         removed = False
 
         for cell in self.cells:
-            if cell.close(point.get('x'), point.get('y')):
-                cell.removePiece()
+            if cell.close(point.get('x'), point.get('y')) and cell.pieceColor() == color:
+                cell.trashPiece()
+                if color == 'white':
+                    self.trashedWhite += 1
+                if color == 'black':
+                    self.trashedBlack += 1
                 removed = True
 
         return removed
      
-    def select(self, touch):
+    def select(self, touch, color):
         point = {
             'x': touch.x - 25,
             'y': touch.y - 25
         }
 
         for cell in self.cells:
-            if cell.close(point.get('x'), point.get('y')) and not cell.empty:
-                print('{} : {}'.format(cell.id, cell.empty))
+            if cell.close(point.get('x'), point.get('y')) and not cell.empty and cell.pieceColor() == color:
                 self.selected = cell
                 return True
 
         self.selected = False
         return self.selected
 
-    def move(self, touch):
+    def move(self, touch, color):
+        moved = False
+        point = {
+            'x': touch.x - 25,
+            'y': touch.y - 25
+        }
+
+
         if self.selected:
+            if color == 'white':
+                for neighbors in adjacent:
+                    for neighbor in neighbors:
+                        self.findById()
+            if color == 'black':
+
+
+            # if color == 'white':
+                # neighborCells = []
+                # if self.trashedWhite < 6:
+                #     for mill in self.mills:
+                #         if mill.checkCell(self.selected.id):
+                #             neighborCells.append(self.findById(mill.id1))
+                #             neighborCells.append(self.findById(mill.id2))
+                #             neighborCells.append(self.findById(mill.id3))
+                #
+                # goodBoyCells = False
+                # for cell in neighborCells:
+                #     print(cell.id)
+                #     if cell.close(point.get('x'), point.get('y')):
+                #         goodBoyCells = True
+                #
+                # if not goodBoyCells:
+                #     return False
+
             placed = self.place(self.selected.piece, touch)
             self.selected.removePiece()
             self.selected = False
             return placed
+
         else:
             return False
+
+    def find(self, touch):
+        point = {
+            'x': touch.x - 25,
+            'y': touch.y - 25
+        }
+
+        for cell in self.cells:
+            if cell.close(point.get('x'), point.get('y')):
+                return cell
+
+        return False
+
+    def findById(self, id):
+        for cell in self.cells:
+            if cell.id == id:
+                return cell
+
+        return False
