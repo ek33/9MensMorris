@@ -11,6 +11,32 @@ class Board:
     trashedBlack = 0
 
     def __init__(self, root):
+        self.adjacencyCells = {
+            'a1': ['a4', 'd1'],
+            'a4': ['a1', 'a7', 'b4'],
+            'a7': ['a4', 'd7'],
+            'b2': ['d2', 'b4'],
+            'b4': ['b2', 'b6', 'a4', 'c4'],
+            'b6': ['b4', 'd6'],
+            'c3': ['d3', 'c4'],
+            'c4': ['c3', 'c5', 'b4'],
+            'c5': ['c4', 'd5'],
+            'd1': ['a1', 'g1', 'd2'],
+            'd2': ['b2', 'f2', 'd1', 'd3'],
+            'd3': ['c3', 'e3', 'd2'],
+            'd5': ['c5', 'e5', 'd6'],
+            'd6': ['b6', 'f6', 'd5', 'd7'],
+            'd7': ['a7', 'g7', 'd6'],
+            'e3': ['d3', 'e4'],
+            'e4': ['e3', 'e5', 'f4'],
+            'e5': ['d5', 'e4'],
+            'f2': ['d2', 'f4'],
+            'f4': ['f2', 'f6', 'e4', 'g4'],
+            'f6': ['d6', 'f4'],
+            'g1': ['d1', 'g4'],
+            'g4': ['g1', 'g7', 'f4'],
+            'g7': ['d7', 'g4']
+        }
         self.mills = [
             Mill('a1', 'a4', 'a7'),
             Mill('b2', 'b4', 'b6'),
@@ -128,6 +154,7 @@ class Board:
         return removed
      
     def select(self, touch, color):
+        print('selecting')
         point = {
             'x': touch.x - 25,
             'y': touch.y - 25
@@ -142,43 +169,43 @@ class Board:
         return self.selected
 
     def move(self, touch, color):
-        moved = False
+        print('moving')
         point = {
             'x': touch.x - 25,
             'y': touch.y - 25
         }
 
-
         if self.selected:
             if color == 'white':
-                for neighbors in adjacent:
+                if self.trashedWhite >= 6:
+                    placed = self.place(self.selected.piece, touch)
+                    self.selected.removePiece()
+                    self.selected = False
+                    return placed
+                else:
+                    neighbors = self.adjacencyCells[self.selected.id]
                     for neighbor in neighbors:
-                        self.findById()
+                        neighborCell = self.findById(neighbor)
+                        if neighborCell.close(point.get('x'), point.get('y')) and neighborCell.empty:
+                            placed = self.place(self.selected.piece, touch)
+                            self.selected.removePiece()
+                            self.selected = False
+                            return placed
             if color == 'black':
-
-
-            # if color == 'white':
-                # neighborCells = []
-                # if self.trashedWhite < 6:
-                #     for mill in self.mills:
-                #         if mill.checkCell(self.selected.id):
-                #             neighborCells.append(self.findById(mill.id1))
-                #             neighborCells.append(self.findById(mill.id2))
-                #             neighborCells.append(self.findById(mill.id3))
-                #
-                # goodBoyCells = False
-                # for cell in neighborCells:
-                #     print(cell.id)
-                #     if cell.close(point.get('x'), point.get('y')):
-                #         goodBoyCells = True
-                #
-                # if not goodBoyCells:
-                #     return False
-
-            placed = self.place(self.selected.piece, touch)
-            self.selected.removePiece()
-            self.selected = False
-            return placed
+                if self.trashedBlack >= 6:
+                    placed = self.place(self.selected.piece, touch)
+                    self.selected.removePiece()
+                    self.selected = False
+                    return placed
+                else:
+                    neighbors = self.adjacencyCells[self.selected.id]
+                    for neighbor in neighbors:
+                        neighborCell = self.findById(neighbor)
+                        if neighborCell.close(point.get('x'), point.get('y')) and neighborCell.empty:
+                            placed = self.place(self.selected.piece, touch)
+                            self.selected.removePiece()
+                            self.selected = False
+                            return placed
 
         else:
             return False

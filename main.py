@@ -41,8 +41,7 @@ class NineMenMorrisGame(Widget):
     def on_touch_down(self, touch):
         # Black turn
         if self.turn % 2:
-            print('black - phase {} ::: mill # = {}'.format(self.phase, self.board.blackMills()))
-
+            print('phase {}'.format(self.phase))
             self.board.prevBlackMills = self.board.blackMills()
 
             # Placement phase
@@ -72,11 +71,10 @@ class NineMenMorrisGame(Widget):
                 self.validTurn = False # still your turn
                 self.lastPhase = self.phase #last phase
                 self.phase = 2 # next click will be removal
-                self.board.prevBlackMills = self.board.blackMills()
 
 
         else:
-            print('black - phase {} ::: mill # = {}'.format(self.phase, self.board.blackMills()))
+            print('phase {}'.format(self.phase))
             self.board.prevWhiteMills = self.board.whiteMills()
 
             # Placement phase
@@ -103,15 +101,18 @@ class NineMenMorrisGame(Widget):
                 self.validTurn = False  # still your turn
                 self.lastPhase = self.phase  # last phase
                 self.phase = 2  # next click will be removal
-                self.board.prevWhiteMills = self.board.whiteMills()
 
 
         if self.validTurn:
             self.turn += 1
             self.validTurn = False
+            if self.turn % 2:
+                print('black - phase {} - mills {}'.format(self.phase, self.board.blackMills()))
+            else:
+                print('white - phase {} - mills {}'.format(self.phase, self.board.whiteMills()))
 
         # if self.turn > 18:
-        if self.turn > 5:
+        if self.turn > 8 and self.phase != 2:
             self.phase = 1
 
         if self.board.trashedBlack >= 7 or self.board.trashedWhite >= 7:
