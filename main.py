@@ -38,10 +38,6 @@ class NineMenMorrisGame(Widget):
         self.board = Board(app_root)
 
     def on_touch_down(self, touch):
-        if self.validTurn:
-            self.turn += 1
-            self.validTurn = False
-
         if self.phase == 0:
             if self.turn % 2:
                 # black
@@ -63,12 +59,15 @@ class NineMenMorrisGame(Widget):
                 self.board.move(touch)
             else:
                 self.board.select(touch)
+
         if self.phase == 2:
             if self.turn % 2:
                 print('black made a mill: remove a white piece now')
 
             else:
                 print('white made a mill: remove a black piece now')
+
+            self.phase = 1
 
         if self.validTurn:
             self.turn += 1
