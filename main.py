@@ -39,7 +39,6 @@ class NineMenMorrisGame(Widget):
         self.board = Board(app_root)
 
     def on_touch_down(self, touch):
-
         # Black turn
         if self.turn % 2:
             print('black - phase {} ::: mill # = {}'.format(self.phase, self.board.blackMills()))
