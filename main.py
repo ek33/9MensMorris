@@ -111,8 +111,8 @@ class NineMenMorrisGame(Widget):
             else:
                 print('white - phase {} - mills {}'.format(self.phase, self.board.whiteMills()))
 
-        # if self.turn > 18:
-        if self.turn > 8 and self.phase != 2:
+
+        if self.turn > 18 and self.phase != 2:
             self.phase = 1
 
         if self.board.trashedBlack >= 7 or self.board.trashedWhite >= 7:
