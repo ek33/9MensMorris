@@ -199,15 +199,22 @@ class Board:
     def selectAI(self, color):
         print('selecting')
 
-
-        for cell in self.cells:
-            if not cell.empty and cell.pieceColor() == color:
-                self.selected = cell
-                return True
+        if self.trashedBlack < 6:
+            for cell in self.cells:
+                neighbors = self.adjacencyCells[cell.id]
+                for neighbor in neighbors:
+                    neighborCell = self.findById(neighbor)
+                    if not cell.empty and cell.pieceColor() == color and neighborCell.empty:
+                        self.selected = cell
+                        return True
+        else:
+            for cell in self.cells:
+                if not cell.empty and cell.pieceColor() == color:
+                    self.selected = cell
+                    return True
 
         self.selected = False
         return self.selected
-
 
     def move(self, touch, color):
         print('moving')
@@ -256,6 +263,7 @@ class Board:
 
         if self.selected:
             if self.trashedBlack >= 6:
+                print("last 3 pieces left")
                 placed = self.placeAI(self.selected.piece)
                 self.selected.removePiece()
                 self.selected = False
@@ -265,7 +273,9 @@ class Board:
                 for neighbor in neighbors:
                     neighborCell = self.findById(neighbor)
                     if neighborCell.empty:
-                        placed = self.placeAI(self.selected.piece)
+                        neighborCell.setPiece(self.selected.piece)
+                        placed = True
+                        #placed = self.placeAI(self.selected.piece)
                         self.selected.removePiece()
                         self.selected = False
                         return placed
