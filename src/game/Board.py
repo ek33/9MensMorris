@@ -135,6 +135,18 @@ class Board:
 
         return placed
 
+    def placeAI(self, piece):
+
+        placed = False
+
+        for cell in self.cells:
+            if cell.empty:
+                cell.setPiece(piece)
+                placed = True
+                return placed
+
+
+
     def remove(self, touch, color):
         point = {
             'x': touch.x - 25,
@@ -152,7 +164,23 @@ class Board:
                 removed = True
 
         return removed
-     
+
+
+    def removeAI(self, color):
+
+        removed = False
+
+        for cell in self.cells:
+            if cell.pieceColor() == color:
+                cell.trashPiece()
+                if color == 'white':
+                    self.trashedWhite += 1
+                if color == 'black':
+                    self.trashedBlack += 1
+                removed = True
+                return removed
+
+
     def select(self, touch, color):
         print('selecting')
         point = {
@@ -167,6 +195,19 @@ class Board:
 
         self.selected = False
         return self.selected
+
+    def selectAI(self, color):
+        print('selecting')
+
+
+        for cell in self.cells:
+            if not cell.empty and cell.pieceColor() == color:
+                self.selected = cell
+                return True
+
+        self.selected = False
+        return self.selected
+
 
     def move(self, touch, color):
         print('moving')
@@ -206,6 +247,28 @@ class Board:
                             self.selected.removePiece()
                             self.selected = False
                             return placed
+
+        else:
+            return False
+
+    def moveAI(self, color):
+        print('moving')
+
+        if self.selected:
+            if self.trashedBlack >= 6:
+                placed = self.placeAI(self.selected.piece)
+                self.selected.removePiece()
+                self.selected = False
+                return placed
+            else:
+                neighbors = self.adjacencyCells[self.selected.id]
+                for neighbor in neighbors:
+                    neighborCell = self.findById(neighbor)
+                    if neighborCell.empty:
+                        placed = self.placeAI(self.selected.piece)
+                        self.selected.removePiece()
+                        self.selected = False
+                        return placed
 
         else:
             return False

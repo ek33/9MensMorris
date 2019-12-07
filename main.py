@@ -1,19 +1,51 @@
 from kivy.app import App
 from src.game import Board
 from kivy.uix.widget import Widget
+from kivy.uix.popup import Popup
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+
 from kivy.properties import (ObjectProperty)
 from kivy.core.window import Window
 Window.size = (970, 650)
 Window.clearcolor = (94/256, 107/256, 98/256, 1)
 
+
 class Piece(Widget):
     pass
 
 class NineMenMorrisGame(Widget):
+
+
+    def callback(instance):
+        if instance.text == "Person":
+            print('p')
+            NineMenMorrisGame.against="person"
+        elif instance.text=="AI":
+            print('a')
+            NineMenMorrisGame.against="ai"
+        NineMenMorrisGame.phase = 0
+        NineMenMorrisGame.popup.dismiss()
+
+
+
+    box = BoxLayout(orientation='vertical', padding=(10))
+    box.add_widget(Label(text="Play against a person or AI?",font_size=13))
+    popup = Popup(title='Select Opponent', title_size=(30),
+                  title_align='center', content=box,
+                  size_hint=(None, None), size=(200, 200),
+                  auto_dismiss=False)
+    box.add_widget(Button(text="Person", on_press=callback))
+    box.add_widget(Button(text="AI", on_press=callback))
+    popup.open()
+
+    phase = 2
+    against = "none"
     turn = 1
     validTurn = False
     lastPhase = 0
-    phase = 0
+
 
     white1 = ObjectProperty(None)
     white2 = ObjectProperty(None)
@@ -38,28 +70,52 @@ class NineMenMorrisGame(Widget):
     def setup(self, app_root):
         self.board = Board(app_root)
 
+
+
     def on_touch_down(self, touch):
         # Black turn
-        if self.turn % 2:
+        if not self.turn % 2:
             print('phase {}'.format(self.phase))
             self.board.prevBlackMills = self.board.blackMills()
-
-            # Placement phase
-            if self.phase == 0:
+            #Human Player for Black Pieces
+            # Placement phase for person
+            if self.against == "person" and self.phase == 0:
                 pieceName = 'black' + str(int((self.turn + 1) / 2))
                 piece = getattr(self, pieceName)
                 self.validTurn = self.board.place(piece, touch)
 
-            # Moving phase
-            if self.phase == 1:
+            # Moving phase for person
+            if self.against == "person" and self.phase == 1:
                 if self.board.selected:
                     self.validTurn = self.board.move(touch, 'black')
                 else:
                     self.board.select(touch, 'black')
 
-            # Removing phase
-            if self.phase == 2:
+            # Removing phase for person
+            if self.against == "person" and self.phase == 2:
                 self.validTurn = self.board.remove(touch, 'white')
+                if self.validTurn:
+                    self.phase = self.lastPhase
+
+            # AI Player for Black Pieces
+            # Placement phase for ai
+            if self.against == "ai" and self.phase == 0:
+                pieceName = 'black' + str(int((self.turn + 1) / 2))
+                piece = getattr(self, pieceName)
+                #self.validTurn = self.board.place(piece, touch)
+                self.validTurn = self.board.placeAI(piece)
+
+            # Moving phase for ai
+            if self.against == "ai" and self.phase == 1:
+                if self.board.selected:
+                    self.validTurn = self.board.moveAI('black')
+                else:
+                    self.board.selectAI('black')
+
+            # Removing phase for ai
+            if self.against == "ai" and self.phase == 2:
+                #self.validTurn = self.board.remove(touch, 'white')
+                self.validTurn = self.board.removeAI('white')
                 if self.validTurn:
                     self.phase = self.lastPhase
 
@@ -68,10 +124,9 @@ class NineMenMorrisGame(Widget):
             # Check for new mills
             if self.board.blackMills() > self.board.prevBlackMills:
                 print('black made a new mill')
-                self.validTurn = False # still your turn
-                self.lastPhase = self.phase #last phase
-                self.phase = 2 # next click will be removal
-
+                self.validTurn = False  # still your turn
+                self.lastPhase = self.phase  # last phase
+                self.phase = 2  # next click will be removal
 
         else:
             print('phase {}'.format(self.phase))
@@ -93,7 +148,8 @@ class NineMenMorrisGame(Widget):
             # Removing phase
             if self.phase == 2:
                 self.validTurn = self.board.remove(touch, 'black')
-                self.phase = self.lastPhase
+                if self.validTurn:
+                    self.phase = self.lastPhase
 
             # Check for new mills
             if self.board.whiteMills() > self.board.prevWhiteMills:
@@ -101,7 +157,6 @@ class NineMenMorrisGame(Widget):
                 self.validTurn = False  # still your turn
                 self.lastPhase = self.phase  # last phase
                 self.phase = 2  # next click will be removal
-
 
         if self.validTurn:
             self.turn += 1
@@ -111,14 +166,11 @@ class NineMenMorrisGame(Widget):
             else:
                 print('white - phase {} - mills {}'.format(self.phase, self.board.whiteMills()))
 
-
         if self.turn > 18 and self.phase != 2:
             self.phase = 1
 
         if self.board.trashedBlack >= 7 or self.board.trashedWhite >= 7:
             print('game over')
-
-
 
 
 
@@ -130,6 +182,8 @@ class NineMenMorrisApp(App):
 
     def on_start(self):
         self.game.setup(self.get_running_app().root)
+
+
 
 if __name__ == '__main__':
     # Run App
